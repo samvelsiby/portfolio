@@ -38,21 +38,9 @@ function App() {
                 alt="Developer Setup" 
                 className="w-full h-64 object-cover rounded-lg mb-4"
               />
-              <div className="text-lg text-gray-700 leading-relaxed font-mono">
-                <Typewriter
-                  options={{
-                    delay: 50,
-                    cursor: '|'
-                  }}
-                  onInit={(typewriter) => {
-                    typewriter
-                      .typeString("Hi! I'm a passionate developer who loves creating beautiful and functional web experiences.")
-                      .pauseFor(500)
-                      .typeString("<br/>This portfolio is designed to showcase my work in a unique way - styled after the familiar Chrome browser interface you use every day.")
-                      .start();
-                  }}
-                />
-              </div>
+              <p className="text-lg text-gray-700 leading-relaxed font-mono">
+                
+              </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-white rounded-lg shadow-lg p-6">
@@ -105,20 +93,20 @@ function App() {
           </div>
         </div>
 
-        <div className="bg-gray-100 border-b border-gray-200">
+        <div className="bg-gray-100 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
           <div className="flex items-center px-2 pt-2">
             {tabs.map(tab => (
               <div
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center px-4 py-2 rounded-t-lg cursor-pointer ${
+                className={`flex items-center px-2 sm:px-4 py-2 rounded-t-lg cursor-pointer ${
                   activeTab === tab.id
-                    ? 'bg-white text-gray-800'
-                    : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                    ? 'bg-white dark:bg-gray-800 text-gray-800 dark:text-white'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
                 }`}
               >
-                <span className="mr-2">{tab.favicon}</span>
-                {tab.title}
+                <span className="text-lg sm:text-base sm:mr-2">{tab.favicon}</span>
+                <span className="hidden sm:inline">{tab.title}</span>
               </div>
             ))}
           </div>
