@@ -1,4 +1,35 @@
-# Logs
+# Personal Portfolio
+
+A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS. Features a unique Chrome browser-inspired interface with dark mode support and interactive elements.
+
+## Features
+
+- Chrome browser-inspired UI
+- Dark mode support
+- Typewriter effect for text animation
+- Responsive design
+- Project showcase
+- Contact form
+- About section with skills and education
+
+## Technologies Used
+
+- React
+- TypeScript
+- Tailwind CSS
+- Vite
+- Typewriter Effect
+
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Run development server: `npm run dev`
+4. Build for production: `npm run build`
+
+## Contact
+
+Feel free to reach out if you have any questions or would like to connect!# Logs
 logs
 *.log
 npm-debug.log*
@@ -7,10 +38,25 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Production
+/build
+/dist
 dist-ssr
-*.local
+
+# Misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +68,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+*.local
