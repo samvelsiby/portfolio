@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Globe, 
   Star, 
@@ -32,6 +32,15 @@ function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [cursorVariant, setCursorVariant] = useState('default');
+  const [experienceVisible, setExperienceVisible] = useState(false);
+  const [projectsVisible, setProjectsVisible] = useState(false);
+  const [aboutVisible, setAboutVisible] = useState(false);
+  const [contactVisible, setContactVisible] = useState(false);
+
+  const experienceRef = useRef(null);
+  const projectsRef = useRef(null);
+  const aboutRef = useRef(null);
+  const contactRef = useRef(null);
 
   useEffect(() => {
     const mouseMove = (e: MouseEvent) => {
@@ -46,6 +55,32 @@ function App() {
     return () => {
       window.removeEventListener("mousemove", mouseMove);
     };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target.id === 'experience') {
+            setExperienceVisible(entry.isIntersecting);
+          } else if (entry.target.id === 'projects') {
+            setProjectsVisible(entry.isIntersecting);
+          } else if (entry.target.id === 'about') {
+            setAboutVisible(entry.isIntersecting);
+          } else if (entry.target.id === 'contact') {
+            setContactVisible(entry.isIntersecting);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (experienceRef.current) observer.observe(experienceRef.current);
+    if (projectsRef.current) observer.observe(projectsRef.current);
+    if (aboutRef.current) observer.observe(aboutRef.current);
+    if (contactRef.current) observer.observe(contactRef.current);
+
+    return () => observer.disconnect();
   }, []);
 
   const variants = {
@@ -177,10 +212,10 @@ function App() {
 
         {/* Content - Scrollable */}
         <div className="flex-1 overflow-y-auto bg-gradient-to-b from-gray-900 to-gray-950 text-gray-300">
-          <section id="home" className="min-h-[10vh] flex items-start pt-10">
+          <section id="home" className="h-[calc(100vh-8.5rem)] flex items-center">
             <div className="p-6 max-w-4xl mx-auto relative">
               {/* Background glow effect */}
-              <div className="absolute    -inset-1 bg-gradient-to-r from-purple-600/30 to-blue-600/30 rounded-lg blur-3xl opacity-20 animate-pulse"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/30 to-blue-600/30 rounded-lg blur-3xl opacity-20 animate-pulse"></div>
               
               <div className="relative">
                 <h1 className="text-4xl font-bold mb-6 relative animate-fade-in">
@@ -277,21 +312,91 @@ function App() {
             </div>
           </section>
 
-          <section id="experience" className="min-h-screen py-16">
-            <Experience />
-          </section>
+          <div className="mt-0">
+            <section id="experience" ref={experienceRef} className="min-h-screen">
+              <div className="p-6 max-w-4xl mx-auto">
+                <h2 className="text-4xl font-bold mb-8">
+                  <Typewriter
+                    options={{
+                      strings: ['Experience'],
+                      autoStart: true,
+                      loop: true,
+                      cursor: '▎',
+                      delay: 75,
+                      deleteSpeed: 50,
+                      pauseFor: 2500,
+                      wrapperClassName: 'bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 text-transparent bg-clip-text animate-gradient-x',
+                      cursorClassName: 'text-blue-500 animate-pulse'
+                    }}
+                  />
+                </h2>
+                <Experience />
+              </div>
+            </section>
 
-          <section id="projects" className="min-h-screen py-16">
-            <Projects />
-          </section>
+            <section id="projects" ref={projectsRef} className="min-h-screen">
+              <div className="p-6 max-w-4xl mx-auto">
+                <h2 className="text-4xl font-bold mb-8">
+                  <Typewriter
+                    options={{
+                      strings: ['Projects'],
+                      autoStart: true,
+                      loop: true,
+                      cursor: '▎',
+                      delay: 75,
+                      deleteSpeed: 50,
+                      pauseFor: 2500,
+                      wrapperClassName: 'bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 text-transparent bg-clip-text animate-gradient-x',
+                      cursorClassName: 'text-blue-500 animate-pulse'
+                    }}
+                  />
+                </h2>
+                <Projects />
+              </div>
+            </section>
 
-          <section id="about" className="min-h-screen py-16">
-            <About />
-          </section>
+            <section id="about" ref={aboutRef} className="min-h-screen">
+              <div className="p-6 max-w-4xl mx-auto">
+                <h2 className="text-4xl font-bold mb-8">
+                  <Typewriter
+                    options={{
+                      strings: ['About Me'],
+                      autoStart: true,
+                      loop: true,
+                      cursor: '▎',
+                      delay: 75,
+                      deleteSpeed: 50,
+                      pauseFor: 2500,
+                      wrapperClassName: 'bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 text-transparent bg-clip-text animate-gradient-x',
+                      cursorClassName: 'text-blue-500 animate-pulse'
+                    }}
+                  />
+                </h2>
+                <About />
+              </div>
+            </section>
 
-          <section id="contact" className="min-h-screen py-16">
-            <Contact />
-          </section>
+            <section id="contact" ref={contactRef} className="min-h-screen">
+              <div className="p-6 max-w-4xl mx-auto">
+                <h2 className="text-4xl font-bold mb-8">
+                  <Typewriter
+                    options={{
+                      strings: ['Contact'],
+                      autoStart: true,
+                      loop: true,
+                      cursor: '▎',
+                      delay: 75,
+                      deleteSpeed: 50,
+                      pauseFor: 2500,
+                      wrapperClassName: 'bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 text-transparent bg-clip-text animate-gradient-x',
+                      cursorClassName: 'text-blue-500 animate-pulse'
+                    }}
+                  />
+                </h2>
+                <Contact />
+              </div>
+            </section>
+          </div>
         </div>
       </div>
     </div>

@@ -39,29 +39,24 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="min-h-screen py-16 px-8">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl mb-8 bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 text-transparent bg-clip-text">Experience</h2>
-        <div className="space-y-8">
-          {/* Experience Items */}
-          {experiences.map((experience, index) => (
-            <div key={index} className="bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300">
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="text-xl text-blue-400 font-mono">{experience.title}</h3>
-                <span className="text-gray-400 text-sm">{experience.duration}</span>
-              </div>
-              <h4 className="text-gray-300 mb-4">{experience.company}</h4>
-              <p className="text-blue-300/80 text-sm mb-3 font-mono">{experience.tech}</p>
-              <ul className="list-disc list-inside space-y-2 text-gray-300">
-                {experience.description.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+    <div className="space-y-6">
+      {/* Experience Items */}
+      {experiences.map((experience, index) => (
+        <div key={index} className="bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300">
+          <div className="flex justify-between items-start mb-2">
+            <h3 className="text-xl text-blue-400 font-mono">{experience.title}</h3>
+            <span className="text-gray-400 text-sm">{experience.duration}</span>
+          </div>
+          <h4 className="text-gray-300 mb-4">{experience.company}</h4>
+          <p className="text-blue-300/80 text-sm mb-3 font-mono">{experience.tech}</p>
+          <ul className="list-disc list-inside space-y-2 text-gray-300">
+            {experience.description.map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
         </div>
-      </div>
-    </section>
+      ))}
+    </div>
   );
 };
 
