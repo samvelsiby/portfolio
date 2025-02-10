@@ -39,38 +39,29 @@ const Experience = () => {
   ];
 
   return (
-    <div className="p-8 max-w-6xl mx-auto">
-      <h2 className="text-3xl font-bold mb-8 text-gray-100">Experience</h2>
-      <div className="relative">
-        {/* Timeline line */}
-        <div className="absolute left-0 md:left-1/2 h-full w-0.5 bg-blue-400 transform -translate-x-1/2"></div>
-        
-        {/* Experience items */}
-        <div className="space-y-12">
+    <section id="experience" className="min-h-screen py-16 px-8">
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-3xl mb-8 bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 text-transparent bg-clip-text">Experience</h2>
+        <div className="space-y-8">
+          {/* Experience Items */}
           {experiences.map((experience, index) => (
-            <div key={index} className="relative">
-              {/* Timeline dot */}
-              <div className="absolute left-0 md:left-1/2 -ml-2 md:-ml-3 mt-3 w-4 h-4 bg-blue-400 rounded-full transform -translate-x-1/2 z-10"></div>
-              
-              {/* Content */}
-              <div className={`ml-6 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12 md:ml-auto'}`}>
-                <div className="bg-gray-800/80 p-6 rounded-lg shadow-lg border border-gray-700/50">
-                  <h3 className="text-xl font-semibold text-gray-100">{experience.title}</h3>
-                  <p className="text-blue-400 font-medium mb-1">{experience.company}</p>
-                  <p className="text-gray-400 text-sm mb-2">{experience.duration}</p>
-                  <p className="text-blue-300/80 text-sm mb-3">{experience.tech}</p>
-                  <ul className="list-disc list-inside space-y-2 text-gray-300">
-                    {experience.description.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
+            <div key={index} className="bg-gray-800/50 rounded-lg p-6 backdrop-blur-sm border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300">
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="text-xl text-blue-400 font-mono">{experience.title}</h3>
+                <span className="text-gray-400 text-sm">{experience.duration}</span>
               </div>
+              <h4 className="text-gray-300 mb-4">{experience.company}</h4>
+              <p className="text-blue-300/80 text-sm mb-3 font-mono">{experience.tech}</p>
+              <ul className="list-disc list-inside space-y-2 text-gray-300">
+                {experience.description.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

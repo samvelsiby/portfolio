@@ -31,36 +31,47 @@ import resume from './assets/Samvel-Siby.pdf';
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [cursorVariant, setCursorVariant] = useState('default');
 
   useEffect(() => {
-    const observers: { [key: string]: IntersectionObserver } = {};
-    const sections = ['home', 'experience', 'projects', 'about', 'contact'];
-    
-    sections.forEach(section => {
-      const element = document.getElementById(section);
-      if (element) {
-        observers[section] = new IntersectionObserver(
-          (entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                setActiveSection(section);
-              }
-            });
-          },
-          { threshold: 0.5 }
-        );
-        observers[section].observe(element);
-      }
-    });
-
-    return () => {
-      sections.forEach(section => {
-        if (observers[section]) {
-          observers[section].disconnect();
-        }
+    const mouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: e.clientX,
+        y: e.clientY
       });
     };
+
+    window.addEventListener("mousemove", mouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", mouseMove);
+    };
   }, []);
+
+  const variants = {
+    default: {
+      x: mousePosition.x - 16,
+      y: mousePosition.y - 16,
+      transition: {
+        type: "spring",
+        mass: 0.6
+      }
+    },
+    text: {
+      x: mousePosition.x - 75,
+      y: mousePosition.y - 75,
+      scale: 3,
+      border: "3px solid #fff",
+      transition: {
+        type: "spring",
+        mass: 0.6
+      }
+    }
+  };
+
+  const enterLink = () => setCursorVariant("text");
+  const leaveLink = () => setCursorVariant("default");
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -71,14 +82,29 @@ function App() {
 
   const tabs = [
     { id: 'home', title: 'Home', icon: <Home className="w-5 h-5" /> },
-    { id: 'experience', title: 'Experience', icon: <Briefcase className="w-5 h-5" /> },
     { id: 'projects', title: 'Projects', icon: <FolderGit2 className="w-5 h-5" /> },
+    { id: 'experience', title: 'Experience', icon: <Briefcase className="w-5 h-5" /> },
     { id: 'about', title: 'About', icon: <User className="w-5 h-5" /> },
-    { id: 'contact', title: 'Contact', icon: <Mail className="w-5 h-5" /> }
+    { id: 'contact', title: 'Contact', icon: <Mail className="w-5 h-5" /> },
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900 p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gray-900 p-4 relative overflow-hidden font-mono">
+      {/* Cursor */}
+      <div 
+        className="cursor-glow fixed pointer-events-none z-50 mix-blend-screen"
+        style={{
+          left: `${mousePosition.x}px`,
+          top: `${mousePosition.y}px`,
+          transform: `translate(-50%, -50%)`
+        }}
+      >
+        <div className="relative">
+          <div className="absolute inset-0 rounded-full bg-blue-500 blur-md opacity-30 animate-pulse-slow"></div>
+          <div className="h-4 w-4 rounded-full bg-blue-400 shadow-lg shadow-blue-500/50"></div>
+        </div>
+      </div>
+      
       {/* Animated Background */}
       <div className="absolute inset-0 -z-10">
         <div 
@@ -130,14 +156,18 @@ function App() {
                     <button
                       key={tab.id}
                       onClick={() => scrollToSection(tab.id)}
-                      className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                      className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
                         activeSection === tab.id
                           ? 'text-blue-400 bg-gray-900/80'
                           : 'text-gray-300 hover:text-blue-400 hover:bg-gray-900/60'
                       }`}
                     >
-                      {tab.icon}
-                      <span className="ml-2">{tab.title}</span>
+                      <span className="transform transition-transform duration-300 hover:scale-110">
+                        {tab.icon}
+                      </span>
+                      <span className="ml-2 transition-all duration-300 opacity-100 max-w-[100px] md:block hidden">
+                        {tab.title}
+                      </span>
                     </button>
                   ))}
                 </div>
@@ -149,87 +179,100 @@ function App() {
         {/* Content - Scrollable */}
         <div className="flex-1 overflow-y-auto bg-gradient-to-b from-gray-900 to-gray-950 text-gray-300">
           <section id="home" className="min-h-screen flex items-center">
-            <div className="p-8 max-w-4xl mx-auto">
-              <h1 className="text-4xl font-bold mb-6 font-mono relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-500 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000"></div>
-                <div className="relative">
-                  <div className="flex flex-col items-start gap-4">
-                    <Typewriter
-                      options={{
-                        loop: true,
-                        delay: 75,
-                        deleteSpeed: 50,
-                        cursor: '▎',
-                        wrapperClassName: 'bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 text-transparent bg-clip-text',
-                        cursorClassName: 'text-blue-500 animate-pulse'
-                      }}
-                      onInit={(typewriter) => {
-                        typewriter
-                          .typeString('Hello, I\'m Samvel Siby')
-                          .pauseFor(1000)
-                          .deleteAll()
-                          .typeString('I\'m a Software Developer')
-                          .pauseFor(1000)
-                          .deleteAll()
-                          .start();
-                      }}
-                    />
-                    <div className="flex items-center space-x-4">
-                      <a
-                        href={resume}
-                        download="Samvel-Siby-Resume.pdf"
-                        className="group text-lg font-mono relative inline-flex items-center"
-                      >
-                        <span className="relative inline-block transition-transform duration-300 group-hover:-translate-y-1">
-                          View My Resume
-                          <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-                        </span>
-                        <Download className="w-4 h-4 ml-2 opacity-0 transform translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0" />
-                      </a>
+            <div className="p-8 max-w-4xl mx-auto relative">
+              {/* Background glow effect */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/30 to-blue-600/30 rounded-lg blur-3xl opacity-20 animate-pulse"></div>
+              
+              <div className="relative">
+                <h1 className="text-4xl font-bold mb-6 relative animate-fade-in">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-500 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000"></div>
+                  <div className="relative">
+                    <div className="flex flex-col items-start gap-4">
+                      <Typewriter
+                        options={{
+                          loop: true,
+                          delay: 75,
+                          deleteSpeed: 50,
+                          cursor: '▎',
+                          wrapperClassName: 'bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 text-transparent bg-clip-text animate-gradient-x',
+                          cursorClassName: 'text-blue-500 animate-pulse'
+                        }}
+                        onInit={(typewriter) => {
+                          typewriter
+                            .typeString('Hello, I\'m Samvel Siby')
+                            .pauseFor(1000)
+                            .deleteAll()
+                            .typeString('I\'m a Software Developer')
+                            .pauseFor(1000)
+                            .deleteAll()
+                            .start();
+                        }}
+                      />
+                      <div className="flex items-center space-x-4 animate-float">
+                        <a
+                          onMouseEnter={enterLink}
+                          onMouseLeave={leaveLink}
+                          href="/assets/Samvel-Siby.pdf"
+                          download="Samvel-Siby-Resume.pdf"
+                          className="group flex items-center space-x-2 text-gray-400 hover:text-gray-100 transition-all duration-300 hover:scale-105"
+                        >
+                          <Download className="w-6 h-6 transition-all duration-300 group-hover:-translate-y-1 group-hover:rotate-12" />
+                          <span className="text-sm relative">
+                            View Resume
+                            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                          </span>
+                        </a>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </h1>
-              <div className="prose prose-lg dark:prose-invert">
-                <p className="text-lg text-gray-300 leading-relaxed font-mono mb-6">
-                  Hello My Name is Samvel Siby,
-                  I am a third year computer science student at university of manitoba 
-                </p>
-                <div className="flex items-center space-x-6">
-                  <a
-                    href="https://github.com/samvelsiby"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center space-x-2 text-gray-400 hover:text-gray-100 transition-colors duration-300"
-                  >
-                    <Github className="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-1" />
-                    <span className="text-sm relative">
-                      GitHub
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-                    </span>
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/samvelsiby"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center space-x-2 text-gray-400 hover:text-gray-100 transition-colors duration-300"
-                  >
-                    <Linkedin className="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-1" />
-                    <span className="text-sm relative">
-                      LinkedIn
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-blue-400 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-                    </span>
-                  </a>
-                  <a
-                    href="mailto:samvelsiby@gmail.com"
-                    className="group flex items-center space-x-2 text-gray-400 hover:text-gray-100 transition-colors duration-300"
-                  >
-                    <Mail className="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-1" />
-                    <span className="text-sm relative">
-                      Email
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-green-500 to-blue-500 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-                    </span>
-                  </a>
+                </h1>
+                <div className="prose prose-lg dark:prose-invert">
+                  <p className="text-lg text-gray-300 leading-relaxed mb-6 animate-fade-in-up">
+                    Hello My Name is Samvel Siby,
+                    I am a third year computer science student at university of manitoba 
+                  </p>
+                  <div className="flex items-center space-x-6 animate-fade-in-up-delayed">
+                    <a
+                      onMouseEnter={enterLink}
+                      onMouseLeave={leaveLink}
+                      href="https://github.com/samvelsiby"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center space-x-2 text-gray-400 hover:text-gray-100 transition-all duration-300 hover:scale-105"
+                    >
+                      <Github className="w-6 h-6 transition-all duration-300 group-hover:-translate-y-1 group-hover:rotate-12" />
+                      <span className="text-sm relative">
+                        GitHub
+                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                      </span>
+                    </a>
+                    <a
+                      onMouseEnter={enterLink}
+                      onMouseLeave={leaveLink}
+                      href="https://www.linkedin.com/in/samvelsiby"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center space-x-2 text-gray-400 hover:text-gray-100 transition-all duration-300 hover:scale-105"
+                    >
+                      <Linkedin className="w-6 h-6 transition-all duration-300 group-hover:-translate-y-1 group-hover:rotate-12" />
+                      <span className="text-sm relative">
+                        LinkedIn
+                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-blue-400 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                      </span>
+                    </a>
+                    <a
+                      onMouseEnter={enterLink}
+                      onMouseLeave={leaveLink}
+                      href="mailto:samvelsiby@gmail.com"
+                      className="group flex items-center space-x-2 text-gray-400 hover:text-gray-100 transition-all duration-300 hover:scale-105"
+                    >
+                      <Mail className="w-6 h-6 transition-all duration-300 group-hover:-translate-y-1 group-hover:rotate-12" />
+                      <span className="text-sm relative">
+                        Email
+                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-green-500 to-blue-500 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                      </span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
