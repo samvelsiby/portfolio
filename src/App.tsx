@@ -9,7 +9,13 @@ import {
   ChevronLeft, 
   ChevronRight,
   Search,
-  Lock
+  Lock,
+  Home,
+  FolderGit2,
+  User,
+  Mail,
+  Moon,
+  Sun
 } from 'lucide-react';
 import Typewriter from 'typewriter-effect';
 import Projects from './components/Projects';
@@ -21,10 +27,10 @@ function App() {
   const [activeTab, setActiveTab] = useState('home');
 
   const tabs = [
-    { id: 'home', title: 'Home', favicon: '🏠' },
-    { id: 'projects', title: 'Projects', favicon: '💼' },
-    { id: 'about', title: 'About', favicon: '👤' },
-    { id: 'contact', title: 'Contact', favicon: '📧' }
+    { id: 'home', title: 'Home', icon: <Home className="w-5 h-5" /> },
+    { id: 'projects', title: 'Projects', icon: <FolderGit2 className="w-5 h-5" /> },
+    { id: 'about', title: 'About', icon: <User className="w-5 h-5" /> },
+    { id: 'contact', title: 'Contact', icon: <Mail className="w-5 h-5" /> }
   ];
 
   const renderContent = () => {
@@ -136,7 +142,7 @@ function App() {
                     : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
                 }`}
               >
-                <span className="text-lg sm:text-base sm:mr-2">{tab.favicon}</span>
+                <span className="text-lg sm:text-base sm:mr-2">{tab.icon}</span>
                 <span className="hidden sm:inline">{tab.title}</span>
               </div>
             ))}
