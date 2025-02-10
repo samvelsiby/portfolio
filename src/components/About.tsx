@@ -16,18 +16,18 @@ const About = () => {
 
   return (
     <div className="p-8 max-w-4xl mx-auto">
-      <h2 className="text-3xl font-bold mb-8 text-gray-800">About Me</h2>
+      <h2 className="text-3xl font-bold mb-8 text-gray-100">About Me</h2>
       
       {/* Education Section */}
-      <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-        <h3 className="text-2xl font-semibold mb-4 text-gray-800">Education</h3>
+      <div className="bg-gray-800/80 rounded-lg shadow-lg p-6 mb-8 border border-gray-700/50">
+        <h3 className="text-2xl font-semibold mb-4 text-gray-100">Education</h3>
         <div className="mb-4">
-          <h4 className="text-xl font-medium">{education.school}</h4>
-          <p className="text-gray-600">{education.degree}</p>
-          <p className="text-gray-500">{education.period}</p>
+          <h4 className="text-xl font-medium text-gray-100">{education.school}</h4>
+          <p className="text-gray-300">{education.degree}</p>
+          <p className="text-gray-400">{education.period}</p>
           <div className="mt-2">
-            <p className="font-medium">Relevant Coursework:</p>
-            <ul className="list-disc list-inside text-gray-600">
+            <p className="font-medium text-gray-200">Relevant Coursework:</p>
+            <ul className="list-disc list-inside text-gray-300">
               {education.courses.map((course, index) => (
                 <li key={index}>{course}</li>
               ))}
@@ -37,34 +37,36 @@ const About = () => {
       </div>
 
       {/* Skills Section */}
-      <div className="bg-white rounded-lg shadow-lg p-6">
-        <h3 className="text-2xl font-semibold mb-4 text-gray-800">Skills</h3>
+      <div className="bg-gray-800/80 rounded-lg shadow-lg p-6 border border-gray-700/50">
+        <h3 className="text-2xl font-semibold mb-4 text-gray-100">Skills</h3>
         <div className="space-y-4">
           <div>
-            <h4 className="font-medium mb-2">Languages</h4>
+            <h4 className="font-medium mb-2 text-gray-200">Languages</h4>
             <div className="flex flex-wrap gap-2">
               {skills.languages.map((skill, index) => (
-                <span key={index} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                <span key={index} className="px-3 py-1 bg-blue-900/50 text-blue-300 rounded-full text-sm border border-blue-700/50">
                   {skill}
                 </span>
               ))}
             </div>
           </div>
+          
           <div>
-            <h4 className="font-medium mb-2">Frameworks & Libraries</h4>
+            <h4 className="font-medium mb-2 text-gray-200">Frameworks & Libraries</h4>
             <div className="flex flex-wrap gap-2">
               {skills.frameworks.map((skill, index) => (
-                <span key={index} className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+                <span key={index} className="px-3 py-1 bg-purple-900/50 text-purple-300 rounded-full text-sm border border-purple-700/50">
                   {skill}
                 </span>
               ))}
             </div>
           </div>
+          
           <div>
-            <h4 className="font-medium mb-2">Developer Tools</h4>
+            <h4 className="font-medium mb-2 text-gray-200">Tools & Technologies</h4>
             <div className="flex flex-wrap gap-2">
               {skills.tools.map((skill, index) => (
-                <span key={index} className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">
+                <span key={index} className="px-3 py-1 bg-indigo-900/50 text-indigo-300 rounded-full text-sm border border-indigo-700/50">
                   {skill}
                 </span>
               ))}

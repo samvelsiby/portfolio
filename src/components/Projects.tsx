@@ -30,16 +30,16 @@ const Projects = () => {
 
   return (
     <div className="p-8 max-w-6xl mx-auto">
-      <h2 className="text-3xl font-bold mb-8 text-gray-800 dark:text-white">Projects</h2>
+      <h2 className="text-3xl font-bold mb-8 text-gray-100">Projects</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {projects.map((project, index) => (
-          <div key={index} className="bg-blue-500 dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-200">
-            <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">{project.title}</h3>
-            <p className="text-sm text-blue-200 dark:text-blue-400 mb-3">{project.tech}</p>
-            <p className="text-grey-600 dark:text-gray-300 mb-4">{project.description}</p>
+          <div key={index} className="bg-gray-800/80 rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-200 border border-gray-700/50">
+            <h3 className="text-xl font-semibold mb-2 text-gray-100">{project.title}</h3>
+            <p className="text-sm text-blue-400 mb-3">{project.tech}</p>
+            <p className="text-gray-300 mb-4">{project.description}</p>
             <a 
               href={project.github}
-              className="inline-flex items-center text-blue-400 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline"
+              className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200"
             >
               View on GitHub →
             </a>
