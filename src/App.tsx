@@ -17,7 +17,10 @@ import {
   Moon,
   Sun,
   Briefcase,
-  Download
+  Download,
+  Github,
+  Linkedin,
+  ExternalLink
 } from 'lucide-react';
 import Typewriter from 'typewriter-effect';
 import Projects from './components/Projects';
@@ -171,25 +174,63 @@ function App() {
                           .start();
                       }}
                     />
-                    <a
-                      href={resume}
-                      download="Samvel-Siby-Resume.pdf"
-                      className="group text-lg font-mono relative inline-block"
-                    >
-                      <span className="relative inline-block transition-transform duration-300 group-hover:-translate-y-1">
-                        View My Resume
-                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-                      </span>
-                      <Download className="w-4 h-4 inline-block ml-2 opacity-0 transform translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0" />
-                    </a>
+                    <div className="flex items-center space-x-4">
+                      <a
+                        href={resume}
+                        download="Samvel-Siby-Resume.pdf"
+                        className="group text-lg font-mono relative inline-flex items-center"
+                      >
+                        <span className="relative inline-block transition-transform duration-300 group-hover:-translate-y-1">
+                          View My Resume
+                          <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                        </span>
+                        <Download className="w-4 h-4 ml-2 opacity-0 transform translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </h1>
               <div className="prose prose-lg dark:prose-invert">
-                <p className="text-lg text-gray-300 leading-relaxed font-mono">
+                <p className="text-lg text-gray-300 leading-relaxed font-mono mb-6">
                   Hello My Name is Samvel Siby,
                   I am a third year computer science student at university of manitoba 
                 </p>
+                <div className="flex items-center space-x-6">
+                  <a
+                    href="https://github.com/samvelsiby"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center space-x-2 text-gray-400 hover:text-gray-100 transition-colors duration-300"
+                  >
+                    <Github className="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-1" />
+                    <span className="text-sm relative">
+                      GitHub
+                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                    </span>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/samvelsiby"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center space-x-2 text-gray-400 hover:text-gray-100 transition-colors duration-300"
+                  >
+                    <Linkedin className="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-1" />
+                    <span className="text-sm relative">
+                      LinkedIn
+                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-blue-400 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                    </span>
+                  </a>
+                  <a
+                    href="mailto:samvelsiby@gmail.com"
+                    className="group flex items-center space-x-2 text-gray-400 hover:text-gray-100 transition-colors duration-300"
+                  >
+                    <Mail className="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-1" />
+                    <span className="text-sm relative">
+                      Email
+                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-green-500 to-blue-500 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                    </span>
+                  </a>
+                </div>
               </div>
             </div>
           </section>
