@@ -27,7 +27,6 @@ import Projects from './components/Projects';
 import About from './components/About';
 import Contact from './components/Contact';
 import Experience from './components/Experience';
-import resume from './assets/Samvel-Siby.pdf';
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -178,10 +177,10 @@ function App() {
 
         {/* Content - Scrollable */}
         <div className="flex-1 overflow-y-auto bg-gradient-to-b from-gray-900 to-gray-950 text-gray-300">
-          <section id="home" className="min-h-screen flex items-center">
-            <div className="p-8 max-w-4xl mx-auto relative">
+          <section id="home" className="min-h-[10vh] flex items-start pt-10">
+            <div className="p-6 max-w-4xl mx-auto relative">
               {/* Background glow effect */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/30 to-blue-600/30 rounded-lg blur-3xl opacity-20 animate-pulse"></div>
+              <div className="absolute    -inset-1 bg-gradient-to-r from-purple-600/30 to-blue-600/30 rounded-lg blur-3xl opacity-20 animate-pulse"></div>
               
               <div className="relative">
                 <h1 className="text-4xl font-bold mb-6 relative animate-fade-in">
@@ -213,7 +212,7 @@ function App() {
                           onMouseEnter={enterLink}
                           onMouseLeave={leaveLink}
                           href="/assets/Samvel-Siby.pdf"
-                          download="Samvel-Siby-Resume.pdf"
+                          download
                           className="group flex items-center space-x-2 text-gray-400 hover:text-gray-100 transition-all duration-300 hover:scale-105"
                         >
                           <Download className="w-6 h-6 transition-all duration-300 group-hover:-translate-y-1 group-hover:rotate-12" />
