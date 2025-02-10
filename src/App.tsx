@@ -15,6 +15,7 @@ import Typewriter from 'typewriter-effect';
 import Projects from './components/Projects';
 import About from './components/About';
 import Contact from './components/Contact';
+import myImage from './assets/blake-connally-B3l0g6HLxr8-unsplash.jpg';
 
 function App() {
   const [activeTab, setActiveTab] = useState('home');
@@ -30,15 +31,45 @@ function App() {
     switch(activeTab) {
       case 'home':
         return (
-          <div className="p-8 max-w-4xl mx-auto">
-            <h1 className="text-4xl font-bold mb-6 font-mono">Samvel's Portfolio</h1>
-            <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+          <div className="p-8 max-w-4xl mx-auto ">
+            <h1 className="text-4xl font-bold mb-6 font-mono relative ">
+              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-500 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000"></div>
+              <div className="relative">
+                <Typewriter
+                  options={{
+                    loop: true,
+                    delay: 75,
+                    deleteSpeed: 50,
+                    cursor: '▎',
+                    wrapperClassName: 'bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 text-transparent bg-clip-text',
+                    cursorClassName: 'text-blue-500 animate-pulse'
+                  }}
+                  onInit={(typewriter) => {
+                    typewriter
+                      .typeString('<span class="text-purple-500">Samvel\'s Portfolio</span>')
+                      .pauseFor(2000)
+                      .deleteAll()
+                      .typeString('<span class="text-blue-500">This is my portfolio website</span>')
+                      .pauseFor(2000)
+                      .deleteAll()
+                      .typeString('<span class="text-green-500">I love coding!</span>')
+                      .pauseFor(2000)
+                      .typeString('<span class="text-yellow-500"> I am looking for a summer internship</span>')
+                      .pauseFor(2000)
+                      .start();
+                  }}
+                />
+              </div>
+            </h1>
+            <div className=" rounded-lg bg-gradient-to-r from-purple-600 to-blue-500 shadow-lg p-6 mb-8">
               <img 
-                src="https://unsplash.com/photos/7hw61kY0nnE/download?force=true&w=640" 
-                alt="Developer Setup" 
+                src={myImage}
+                alt="Computer Screen with Code"
                 className="w-full h-64 object-cover rounded-lg mb-4"
               />
               <p className="text-lg text-gray-700 leading-relaxed font-mono">
+                Hello My Name is Samvel Siby,
+                I am a third yaer computer scoicence student at university of manitoba 
                 
               </p>
             </div>
