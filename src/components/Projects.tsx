@@ -6,25 +6,25 @@ const Projects = () => {
       title: "AI-Powered Web Editor",
       tech: ["React", "TypeScript", "OpenAI"],
       description: "A modern web editor with AI capabilities for code completion and error detection.",
-      github: "#"
+      github: "https://github.com/samvelsiby/AI-code-editor"
     },
     {
       title: "Crime Analysis Platform",
       tech: ["Python", "Django", "D3.js"],
       description: "Interactive platform for analyzing crime data with visualization tools.",
-      github: "#"
+      github: "https://github.com/samvelsiby/crime-analysis-platform" 
     },
     {
       title: "Online Food Ordering Platform",
       tech: ["JavaScript", "Next.js", "SQLite", "Tailwind"],
       description: "Collaborative food ordering platform with streamlined dish discovery and enhanced user convenience.",
-      github: "#"
+      github: "https://github.com/samvelsiby/online-food-ordering-platform"
     },
     {
       title: "AWS-Based Deployment Platform",
       tech: ["TypeScript", "Node.js", "Express", "Redis", "AWS SDK"],
       description: "Vercel-inspired deployment platform handling React website deployments with optimized performance using AWS S3 and Redis queues.",
-      github: "#"
+      github: "https://github.com/samvelsiby/AWS-deployment"
     }
   ];
 

@@ -20,13 +20,15 @@ import {
   Download,
   Github,
   Linkedin,
-  ExternalLink
+  ExternalLink,
+  RefreshCcw
 } from 'lucide-react';
 import Typewriter from 'typewriter-effect';
 import Projects from './components/Projects';
 import About from './components/About';
 import Contact from './components/Contact';
 import Experience from './components/Experience';
+import AudioPlayer from './components/AudioPlayer';
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -37,10 +39,16 @@ function App() {
   const [aboutVisible, setAboutVisible] = useState(false);
   const [contactVisible, setContactVisible] = useState(false);
 
+  const homeRef = useRef(null);
   const experienceRef = useRef(null);
   const projectsRef = useRef(null);
   const aboutRef = useRef(null);
   const contactRef = useRef(null);
+
+  const scrollToHome = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setActiveSection('home');
+  };
 
   useEffect(() => {
     const mouseMove = (e: MouseEvent) => {
@@ -172,7 +180,13 @@ function App() {
               <div className="flex items-center space-x-2">
                 <ChevronLeft className="w-4 h-4 text-gray-400" />
                 <ChevronRight className="w-4 h-4 text-gray-400" />
-                <RefreshCw className="w-4 h-4 text-gray-400" />
+                <button
+                  onClick={scrollToHome}
+                  className="p-2 text-gray-400 hover:text-gray-100 transition-colors duration-300"
+                  aria-label="Refresh"
+                >
+                  <RefreshCcw className="w-5 h-5" />
+                </button>
               </div>
               <div className="flex-1 flex items-center bg-gray-950 rounded px-3 py-1">
                 <Lock className="w-4 h-4 text-gray-400 mr-2" />
@@ -212,7 +226,7 @@ function App() {
 
         {/* Content - Scrollable */}
         <div className="flex-1 overflow-y-auto bg-gradient-to-b from-gray-900 to-gray-950 text-gray-300">
-          <section id="home" className="h-[calc(100vh-8.5rem)] flex items-center">
+          <section id="home" ref={homeRef} className="h-[calc(100vh-8.5rem)] flex items-center">
             <div className="p-6 max-w-4xl mx-auto relative">
               {/* Background glow effect */}
               <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/30 to-blue-600/30 rounded-lg blur-3xl opacity-20 animate-pulse"></div>
@@ -234,10 +248,10 @@ function App() {
                         onInit={(typewriter) => {
                           typewriter
                             .typeString('Hello, I\'m Samvel Siby')
-                            .pauseFor(1000)
+                            .pauseFor(15000)
                             .deleteAll()
                             .typeString('I\'m a Software Developer')
-                            .pauseFor(1000)
+                            .pauseFor(15000)
                             .deleteAll()
                             .start();
                         }}
@@ -324,7 +338,6 @@ function App() {
                       cursor: '▎',
                       delay: 75,
                       deleteSpeed: 50,
-                      pauseFor: 2500,
                       wrapperClassName: 'bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 text-transparent bg-clip-text animate-gradient-x',
                       cursorClassName: 'text-blue-500 animate-pulse'
                     }}
@@ -345,7 +358,6 @@ function App() {
                       cursor: '▎',
                       delay: 75,
                       deleteSpeed: 50,
-                      pauseFor: 2500,
                       wrapperClassName: 'bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 text-transparent bg-clip-text animate-gradient-x',
                       cursorClassName: 'text-blue-500 animate-pulse'
                     }}
@@ -366,7 +378,6 @@ function App() {
                       cursor: '▎',
                       delay: 75,
                       deleteSpeed: 50,
-                      pauseFor: 2500,
                       wrapperClassName: 'bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 text-transparent bg-clip-text animate-gradient-x',
                       cursorClassName: 'text-blue-500 animate-pulse'
                     }}
@@ -387,7 +398,6 @@ function App() {
                       cursor: '▎',
                       delay: 75,
                       deleteSpeed: 50,
-                      pauseFor: 2500,
                       wrapperClassName: 'bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 text-transparent bg-clip-text animate-gradient-x',
                       cursorClassName: 'text-blue-500 animate-pulse'
                     }}
@@ -397,6 +407,11 @@ function App() {
               </div>
             </section>
           </div>
+        </div>
+      </div>
+      <div className="relative">
+        <AudioPlayer />
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         </div>
       </div>
     </div>
